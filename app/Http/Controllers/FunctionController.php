@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class FunctionController extends Controller
@@ -58,5 +59,45 @@ class FunctionController extends Controller
     function delete($id) {
         User::findOrFail($id)->delete();
         return back();
+    }
+
+
+
+
+
+
+
+
+    function login() {
+        return view('login');
+    }
+
+    function loginPost(Request $request) {
+
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            return redirect()->route('index');
+        }
+        return back()->withErrors([
+            'error' => 'Email/Password is invalid',
+        ]);
+
+
+    }
+
+    function logout(Request $request) {
+
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect()->route('index');
     }
 }

@@ -10,9 +10,10 @@
     <div>
         @auth
             <a href="{{ route('add') }}">Add</a>
-            <a href="">Logout</a>
+            <a href="{{ route('logout') }}">Logout</a>
+        @else
+            <a href="{{ route('login') }}">Login</a>
         @endauth
-        <a href="">Login</a>
     </div>
     <hr>
     <div>

@@ -10,3 +10,7 @@ Route::get('/edit/{id}', [FunctionController::class, 'edit'])->name('edit');
 Route::post('/edit-post/{id}', [FunctionController::class, 'editPost'])->name('editPost');
 Route::get('/delete/{id}', [FunctionController::class, 'delete'])->name('delete');
 
+
+Route::get('/login', [FunctionController::class, 'login'])->name('login');
+Route::post('/login-post', [FunctionController::class, 'loginPost'])->name('loginPost');
+Route::get('/logout', [FunctionController::class, 'logout'])->name('logout');
